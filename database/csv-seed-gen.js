@@ -2,11 +2,11 @@ console.log('csv seed generator');
 const faker = require('faker');
 const fs = require('fs');
 
-const maxRecords = 5;
-const maxReviews = 2;
+const maxRecords = 1000;
+const maxReviews = 5000;
 // const connection = require('./db.js');
-
-const createProductQuery = 'INSERT INTO products (ID) VALUES (?)';
+console.time('Start CSV Generation');
+// const createProductQuery = 'INSERT INTO products (ID) VALUES (?)';
 
 for (let i = 1; i <=  maxRecords; i += 1) {
   const current = i;
@@ -14,7 +14,7 @@ for (let i = 1; i <=  maxRecords; i += 1) {
   // console.log('record: ' + current);
   
   let fakeData = current + '\r\n';
-  console.log('fakeData: ' + fakeData);
+  // console.log('fakeData: ' + fakeData);
 
   try {
     fs.appendFileSync('records.txt', fakeData);
@@ -47,7 +47,7 @@ for (let i = 1; i <=  maxRecords; i++) {
     fakeData.join(',');
     fakeData = fakeData + '\r\n';
 
-    console.log('fakeData: ', fakeData);
+    // console.log('fakeData: ', fakeData);
     
     // console.log('Product no: ' + productId + ' Review no: ' + j);
     
@@ -65,4 +65,6 @@ for (let i = 1; i <=  maxRecords; i++) {
     // });
   }
 }
+
+console.timeEnd('End CSV Generation');
 
