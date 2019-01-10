@@ -1,15 +1,27 @@
 console.log('csv seed generator');
 const faker = require('faker');
+const fs = require('fs');
+
 const maxRecords = 5;
 const maxReviews = 2;
 // const connection = require('./db.js');
 
-// const createProductQuery = 'INSERT INTO products (ID) VALUES (?)';
+const createProductQuery = 'INSERT INTO products (ID) VALUES (?)';
 
 for (let i = 1; i <=  maxRecords; i += 1) {
   const current = i;
 
-  console.log('record: ' + current);
+  // console.log('record: ' + current);
+  
+  let fakeData = current + '\r\n';
+  console.log('fakeData: ' + fakeData);
+
+  try {
+    fs.appendFileSync('records.txt', fakeData);
+    // console.log('The "data to append" was appended to file!');
+  } catch (err) {
+    console.log('Error writing csv records chunk to file') /* Handle the error */
+  }
   // connection.query(createProductQuery, [current], (err) => {
   //   if (err) {
   //     console.log(err);
@@ -29,11 +41,22 @@ for (let i = 1; i <=  maxRecords; i++) {
     const foundHelpful = Math.round((Math.random() * 25));
     const score = (Math.random() * 5).toFixed(1);
     const title = faker.lorem.words(3);
-
+    
     const date = faker.date.between('2010-01-01', '2018-12-1');
-    const fakeData = [productId, username, 1, reviewText, score, foundHelpful, title, date];
+    let fakeData = [productId, username, 1, reviewText, score, foundHelpful, title, date];
+    fakeData.join(',');
+    fakeData = fakeData + '\r\n';
 
-    console.log('Product no: ' + productId + ' Review no: ' + j);
+    console.log('fakeData: ', fakeData);
+    
+    // console.log('Product no: ' + productId + ' Review no: ' + j);
+    
+    try {
+      fs.appendFileSync('reviews.txt', fakeData);
+      // console.log('The "data to append" was appended to file!');
+    } catch (err) {
+      console.log('Error writing csv reviews chunk to file')/* Handle the error */
+    }
     // connection.query(createReviewQuery, fakeData, (err) => {
     //   if (err) {
     //     // eslint-disable-next-line no-console
@@ -43,13 +66,3 @@ for (let i = 1; i <=  maxRecords; i++) {
   }
 }
 
-console.log('Seed Generator');
-
-const fs = require('fs');
-
-try {
-  fs.appendFileSync('message.txt', 'data to append');
-  console.log('The "data to append" was appended to file!');
-} catch (err) {
-  /* Handle the error */
-}
