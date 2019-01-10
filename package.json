@@ -8,9 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "database": "mysql -u root -p <schema.sql",
+    "database": "mysql -u student -p < database/schema_files/schema.sql",
     "faker": "node database/fake_data_generator.js",
-    "start": "webpack --mode production",
+    "start": "webpack -d --watch",
     "test": "jest",
     "server": "nodemon server/index.js"
   },

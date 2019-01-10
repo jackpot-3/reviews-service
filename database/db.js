@@ -3,9 +3,9 @@ const mysql = require('mysql');
 const faker = require('faker');
 
 const connection = mysql.createConnection({
-  host: 'database',
-  user: 'root',
-  password: 'root',
+  // host: 'database',j
+  user: 'student',
+  password: 'student',
   database: 'reviews_db',
 });
 
