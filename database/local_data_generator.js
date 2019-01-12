@@ -1,5 +1,13 @@
+// Self contained generator
 const faker = require('faker');
-const connection = require('./db.js');
+const { Pool } = require('pg');
+
+// const connection = require('./db.js');
+const connection = new Pool({
+  user: 'bob',
+  database: 'bob',
+  password: 'bob',
+});
 
 const createProductQuery = 'INSERT INTO products (ID) VALUES ($1)';
 

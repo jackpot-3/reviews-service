@@ -68,6 +68,10 @@ app.post('/reviews/helpful/:reviewId', (req, res) => {
   });
 });
 
+app.post('/reviews/',(res, req) => {
+
+});
+
 app.listen(port, () => {
   console.log(`listening on port + ${port}`);
 });

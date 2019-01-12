@@ -20,7 +20,7 @@ let fakeDataRec = '';
 let fakeDataRev = '';
 
 console.log('Number of Records');
-for (let i = 1; i <=  maxRecords; i += 1) {
+for (let i = 1; i <= maxRecords; i += 1) {
   const current = i;
 
   const fakeDataRecord = `${current}\r\n`;
