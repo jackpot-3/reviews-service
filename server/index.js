@@ -36,12 +36,12 @@ app.get('/reviews/average/:productid', (req, res) => {
     } else {
       let totalScore = 0;
       for (let i = 0; i < results.length; i++) {
-        totalScore += results[i].score
+        totalScore += results[i].score;
       }
       const average = totalScore / results.length;
       const responseObject = {
-        "averageScore": average,
-        "totalReviews": results.length
+        'averageScore': average,
+        'totalReviews': results.length
       }
       res.send(responseObject);
     }
@@ -68,16 +68,6 @@ app.post('/reviews/helpful/:reviewId', (req, res) => {
   });
 });
 
-
-
- app.listen(port, () => {
-   console.log(`listening on port + ${port}`);
- });
-
-// setTimeout(() => {
-//   const app = require('./app.js'); 
-//   const port = 3001;
-//   setTimeout(() => {
-//     app.listen(port, () => { console.log(`listening on port + ${port}`); });
-//   }, 0);
-// }, 0);
+app.listen(port, () => {
+  console.log(`listening on port + ${port}`);
+});

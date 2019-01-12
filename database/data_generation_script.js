@@ -2,18 +2,24 @@ console.log('csv seed generator');
 const faker = require('faker');
 const fs = require('fs');
 
-const usbMount = `/media/bill/3FE0-6909/`;
+// const usbMount = `/media/bill/3FE0-6909/`;
 
 const maxRecords = 10000000;
-const maxReviews = 10;
+// const maxRecords = 100;
+const maxReviews = 5;
 
-const maxChunckSize = 10000;
+const maxChunckSize = 100000;
+// const maxChunckSize = 5;
+
+let totalRecordCount = 0;
+
 
 const t0 = new Date().getTime();
 
 let fakeDataRec = '';
 let fakeDataRev = '';
 
+console.log('Number of Records');
 for (let i = 1; i <=  maxRecords; i += 1) {
   const current = i;
 
@@ -21,14 +27,15 @@ for (let i = 1; i <=  maxRecords; i += 1) {
 
   fakeDataRec += fakeDataRecord;
 
-  if (i % maxChunckSize === 0) {
+  if ((i % maxChunckSize) === 0) {
     try {
-      fs.appendFileSync(`${usbMount}records.txt`, fakeDataRec);
+      fs.appendFileSync('records.txt', fakeDataRec);
       // console.log('The "data to append" was appended to file!');
     } catch (err) {
       console.log('Error writing csv records chunk to file'); /* Handle the error */
     }
-
+    totalRecordCount += maxChunckSize;
+    // console.log(totalRecordCount);
     fakeDataRec = '';
   }
 }
@@ -51,23 +58,22 @@ for (let i = 1; i <= maxRecords; i++) {
     fakeDataReviews.join(',');
     fakeDataReviews = `${fakeDataReviews}\r\n`;
 
-    // console.log('fakeData: ', fakeData);
-    
     fakeDataRev += fakeDataReviews;
 
-    if (j % maxChunckSize === 0) {
+    if ((j % maxChunckSize) === 0) {
       try {
-        fs.appendFileSync(`${usbMount}reviews.txt`, fakeDataRev);
+        fs.appendFileSync('reviews.txt', fakeDataRev);
         // console.log('The "data to append" was appended to file!');
       } catch (err) {
         console.log('Error writing csv reviews chunk to file')/* Handle the error */
       }
-
+      totalRecordCount += maxChunckSize;
+      console.log(totalRecordCount);
       fakeDataRev = '';
     }
   }
 }
 
 const t1 = new Date().getTime();
-console.log(`To write ${maxRecords * maxReviews} records the `);
+console.log(`To write ${maxRecords + (maxRecords * maxReviews)} records the `);
 console.log(`Elapsed time: ${((t1 - t0) / 1000)} seconds!`);
