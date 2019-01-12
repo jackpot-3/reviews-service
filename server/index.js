@@ -3,13 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database/db.js');
+const morgan = require('morgan');
 
 const port = 3001;
 // const Cors = require('cors');
 
 const app = express();
 
-// app.use(Cors());
+// app.use(Cors());\
+app.use(morgan('dev'));
 app.use('/:productid', express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser());
@@ -68,7 +70,25 @@ app.post('/reviews/helpful/:reviewId', (req, res) => {
   });
 });
 
-app.post('/reviews/',(res, req) => {
+app.put('/reviews/:reviewId/:reviewText', (req, res) => {
+  const reviewId = req.params.reviewId;
+  const reviewText = req.params.reviewText;
+  console.log('req.params.reviewId', req.params.reviewId);
+  console.log('req.params.reviewId', req.params.reviewText);
+
+  const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE product_id = $2;';
+  console.log('used PUT Review updated');
+  
+  db.query(reviewQuery, [reviewText, reviewId], (error, results) => {
+    if (error) {
+      console.log('Error:', error);
+      res.send(error);
+    } else {
+      console.log('used PUT Review updated with results', results);
+      res.send(results);
+    }
+  });
+
 
 });
 
