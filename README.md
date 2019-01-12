@@ -39,7 +39,7 @@ npm install
 ```
 ## API
 
-Get Post Put(Admin Only) Delete(Admin Only) Reviews
+Get Post Put(Admin Only) Delete(Admin Only) Reviews \
 PUT & DELETE will use an 64 digit hash as a prefix
 
 - GET /reviews/average/:productid
