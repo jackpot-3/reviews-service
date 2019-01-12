@@ -71,12 +71,10 @@ app.post('/reviews/helpful/:reviewId', (req, res) => {
 });
 
 app.put('/reviews/:reviewId/:reviewText', (req, res) => {
-  const reviewId = req.params.reviewId;
-  const reviewText = req.params.reviewText;
-  console.log('req.params.reviewId', req.params.reviewId);
-  console.log('req.params.reviewId', req.params.reviewText);
-
-  const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE product_id = $2;';
+  const { reviewId } = req.params;
+  const { reviewText } = req.params;
+  
+  const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
   console.log('used PUT Review updated');
   
   db.query(reviewQuery, [reviewText, reviewId], (error, results) => {
@@ -88,8 +86,21 @@ app.put('/reviews/:reviewId/:reviewText', (req, res) => {
       res.send(results);
     }
   });
+});
 
+app.delete('/reviews/:reviewId', (req, res) => {
+  const { reviewId } = req.params;
+  console.log('reviewId: ', reviewId);
+  const deleteReviewQuery = 'DELETE FROM reviews WHERE id = $1';
 
+  db.query(deleteReviewQuery, [reviewId], (error, response) => {
+    if (error) {
+      console.log('Error: ', error);
+    } else {
+      console.log('You have deleted a review');
+      res.send(response);
+    }
+  });
 });
 
 app.listen(port, () => {
