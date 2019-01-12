@@ -4,16 +4,17 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/jackpot-3/reviews-service
+  - https://github.com/jackpot-3/cart
+  - https://github.com/jackpot-3/nav
+  - https://github.com/jackpot-3/product_detail_service
 
 ## Table of Contents
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+1. [API](#API)
 
 ## Usage
 
@@ -36,4 +37,12 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
+## API
 
+Get Post Put(Admin Only) Delete(Admin Only) Reviews
+PUT & DELETE will use an 64 digit hash as a prefix
+
+- GET /reviews/average/:productid
+- POST /reviews/helpful/:reviewId
+- PUT /reviews/:reviewId/:reviewText
+- DELETE /reviews/:reviewId
