@@ -20,25 +20,27 @@ let fakeDataRec = '';
 let fakeDataRev = '';
 
 console.log('Number of Records');
+console.log('Number of Records');
 for (let i = 1; i <= maxRecords; i += 1) {
   const current = i;
-  
-  const fakeDataRecord = `${current}\n`;
-  
+
+  const fakeDataRecord = `${current}\r\n`;
+
   fakeDataRec += fakeDataRecord;
-  
+
   if ((i % maxChunckSize) === 0) {
     try {
       fs.appendFileSync('products.tsv', fakeDataRec);
       // console.log('The "data to append" was appended to file!');
     } catch (err) {
-      // console.log('Error writing csv records chunk to file'); /* Handle the error */
+      console.log('Error writing csv records chunk to file'); /* Handle the error */
     }
     totalRecordCount += maxChunckSize;
     // console.log(totalRecordCount);
     fakeDataRec = '';
   }
 }
+
 
 // const createReviewQuery = 'INSERT INTO reviews (product_id, username, is_verified, review_text, score, found_helpful, title, review_date) VALUES (?,?,?,?,?,?,?,?)';
 
