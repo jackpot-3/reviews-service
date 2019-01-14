@@ -1,5 +1,6 @@
 const db = require('../../database/db.js');
 
+// /reviews/all /: productid
 const findReviews = (req, res) => {
   console.log('*** findReviews ***');
   const productId = req.params.productid;
@@ -15,6 +16,7 @@ const findReviews = (req, res) => {
   });
 };
 
+// /reviews/average /: productid
 const getAverageScore = (req, res) => {
   const productId = +req.params.productid;
   const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
@@ -40,6 +42,7 @@ const getAverageScore = (req, res) => {
   });
 };
 
+// /reviews/helpful /: reviewId
 const setReview = (req, res) => {
   const thisId = req.params.reviewId;
   const thisQuery = 'UPDATE reviews SET found_helpful = found_helpful + 1 WHERE id = $1';
@@ -60,6 +63,7 @@ const setReview = (req, res) => {
   });
 };
 
+// /reviews/: reviewId /: reviewText
 const updateReview =  (req, res) => {
   const { reviewId } = req.params;
   const { reviewText } = req.params;
@@ -77,6 +81,7 @@ const updateReview =  (req, res) => {
   });
 };
 
+// /reviews/: reviewId
 const deleteReview = (req, res) => {
   const { reviewId } = req.params;
   console.log('reviewId: ', reviewId);

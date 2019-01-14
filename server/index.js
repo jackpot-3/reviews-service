@@ -2,16 +2,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const path = require('path');
-const db = require('../database/db');
 const controller = require('./controllers/controller');
 
 const port = 3001;
-// const Cors = require('cors');
 
 const app = express();
 
-// app.use(Cors());\
 app.use(morgan('dev'));
 // app.use('/:productid', express.static(path.join(__dirname, '../public')));
 
