@@ -23,7 +23,7 @@ for (let i = 1; i <= 100; i += 1) {
 const createReviewQuery = 'INSERT INTO reviews (product_id, username, is_verified, review_text, score, found_helpful, title, review_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
 
 for (let i = 1; i <= 100; i++) {
-  for (let j = 0; j < 1; j++) {
+  for (let j = 0; j < 10; j++) {
     const productId = i;
     const username = faker.internet.userName();
     const reviewText = faker.lorem.paragraph(1);

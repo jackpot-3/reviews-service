@@ -10,7 +10,7 @@ const connection = new Pool({
 
 // const createProductQuery = 'INSERT INTO products (ID) VALUES ($1)';
 console.log('**** db ****');
-// for (let i = 1; i <= 10; i += 1) {
+// for (let i = 1; i <= 5; i++) {
 //   const current = i;
 //   connection.query(createProductQuery, [current], (err) => {
 //     if (err) {
@@ -20,8 +20,8 @@ console.log('**** db ****');
 // }
 
 // const createReviewQuery = 'INSERT INTO reviews (product_id, username, is_verified, review_text, score, found_helpful, title, review_date) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)';
-
-// for (let i = 1; i <= 10; i++) {
+// let idKey = 0;
+// for (let i = 1; i <= 5; i++) {
 //   for (let j = 0; j < 1; j++) {
 //     const productId = i;
 //     const username = faker.internet.userName();
@@ -38,6 +38,7 @@ console.log('**** db ****');
 //         console.log(err);
 //       }
 //     });
+//     idKey += 1;
 //   }
 // }
 
