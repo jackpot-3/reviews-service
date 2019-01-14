@@ -51,7 +51,7 @@ for (let i = 1; i <= maxRecords; i++) {
   // const id = i;
   for (let j = 0; j < numberOfReviews; j++) {
     
-    const fakeDataReviews = `${reviewsId}\t${j}\t${faker.internet.userName()}\t${1}\t${faker.lorem.paragraph(1)}\t${Math.round((Math.random() * 5))}\t${Math.round((Math.random() * 25))}\t${faker.lorem.words(3)}\t${faker.date.between('2010-01-01', '2018-12-1').toISOString()}`;
+    const fakeDataReviews = `${reviewsId}\t${j}\t${faker.internet.userName()}\t${1}\t${faker.lorem.paragraph(1)}\t${Math.round((Math.random() * 5))}\t${Math.round((Math.random() * 25))}\t${faker.lorem.words(3)}\t${faker.date.between('2010-01-01', '2018-12-1').toISOString()}\n`;
     fakeDataRev += fakeDataReviews;
     reviewsId += 1; // Only increment if write successful
     

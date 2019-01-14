@@ -1,9 +1,10 @@
 
 const express = require('express');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-const db = require('../database/db.js');
-const morgan = require('morgan');
+const db = require('../database/db');
+const controller = require('./controllers/controller');
 
 const port = 3001;
 // const Cors = require('cors');
@@ -16,17 +17,7 @@ app.use('/:productid', express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser());
 
-app.get('/reviews/all/:productid', (req, res) => {
-  const productId = req.params.productid;
-  const thisQuery = 'SELECT * FROM reviews WHERE product_id = ?';
-  db.query(thisQuery, [productId], (error, results) => {
-    if (error) {
-      res.send(error);
-    } else {
-      res.send(results);
-    }
-  });
-});
+app.get('/reviews/all/:productid', controller.findReviews);
 
 app.get('/reviews/average/:productid', (req, res) => {
   const productId = req.params.productid;
@@ -37,14 +28,14 @@ app.get('/reviews/average/:productid', (req, res) => {
       res.send(error);
     } else {
       let totalScore = 0;
-      for (let i = 0; i < results.length; i++) {
+      for (let i = 0; i < results.length; i += 1) {
         totalScore += results[i].score;
       }
       const average = totalScore / results.length;
       const responseObject = {
-        'averageScore': average,
-        'totalReviews': results.length
-      }
+        averageScore: average,
+        totalReviews: results.length,
+      };
       res.send(responseObject);
     }
   });
