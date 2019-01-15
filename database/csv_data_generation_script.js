@@ -76,5 +76,8 @@ for (let i = 1; i <= maxRecords; i++) {
 }
 
 const t1 = new Date().getTime();
+
 console.log(`To write ${maxRecords + (maxRecords * maxReviews)} records the `);
 console.log(`Elapsed time: ${((t1 - t0) / 1000)} seconds!`);
+
+process.exit();
