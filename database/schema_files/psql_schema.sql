@@ -11,12 +11,12 @@ CREATE TABLE products (
 CREATE TABLE reviews (
 	id SERIAL PRIMARY KEY,
 	product_id INT NOT NULL,
-	username VARCHAR(25),
+	username VARCHAR(50),
 	is_verified INT NOT NULL,
 	review_text TEXT,
 	score INT NOT NULL,
 	found_helpful INT,
-	title VARCHAR (50),
+	title VARCHAR (125),
 	review_date DATE,
 	FOREIGN KEY (product_id) REFERENCES products(id)
 );

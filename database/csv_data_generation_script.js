@@ -8,9 +8,11 @@ const maxRecords = 10000000; // TURN ON
 // const maxRecords = 100; // TURN OFF
 const maxReviews = 10; // TURN ON
 
-const maxChunckSize = 1000000;  // TURN ON
+const maxChunckSize = 1000000; // TURN ON
 // const maxChunckSize = 10;  // TURN OFF
 
+const rndSeed = [1, 1, 2, 3, 4, 3, 1, 1, 20, 25, 30];
+let pointer = 0;
 const t0 = new Date().getTime();
 
 let fakeDataRec = '';
@@ -44,7 +46,8 @@ for (let i = 1; i <= maxRecords; i += 1) {
   const numberOfReviews = maxReviews; // temp replace
   for (let j = 0; j < numberOfReviews; j += 1) {
     const productId = i;
-    const username = faker.internet.userName();
+    // const username = `${faker.internet.userName()}`;
+    const username = `${faker.internet.userName()}${i}${j}`;
     const reviewText = faker.lorem.paragraph(1);
     const foundHelpful = Math.round((Math.random() * 25));
     const score = Math.round((Math.random() * 5).toFixed(1));
@@ -64,6 +67,9 @@ for (let i = 1; i <= maxRecords; i += 1) {
       } catch (err) {
         console.log('Error writing csv reviews chunk to file')/* Handle the error */
       }
+
+      pointer += 1;
+      pointer = pointer > rndSeed.length - 1 ? 20 : rndSeed.length - 1;
       // totalRecordCount += maxChunckSize;
       // console.log(totalRecordCount);
       fakeDataRev = '';
