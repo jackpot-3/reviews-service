@@ -53,6 +53,7 @@
     "file-loader": "^3.0.1",
     "fs": "0.0.1-security",
     "jest": "^23.6.0",
+    "newrelic": "^5.1.0",
     "nodemon": "^1.18.9",
     "style-loader": "^0.23.1",
     "superagent": "^4.0.0",

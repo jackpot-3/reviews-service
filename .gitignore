@@ -3,8 +3,12 @@ node_modules
 package-lock.json
 public/bundle.js
 
+
+__data-keep-4-now
 database/*.txt
 database/*.tsv
 database/*.csv
+database/data
+database/data_bak
+database/data/db
 data
-data/db
