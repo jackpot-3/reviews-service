@@ -1,5 +1,7 @@
 const db = require('../../database/db.js');
-const findReviewsQuery = require('../../database/models/postgres/ReviewsQuery.js');
+const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
+// const findReviewsQuery = require('../../database/models/postgres/ReviewsQuery.js');
+// const getAverageScore = require('../../database/models/postgres/ReviewsQuery.js');
 
 // /reviews/all /: productid
 const findReviews = (req, res) => {
@@ -8,7 +10,7 @@ const findReviews = (req, res) => {
   console.log('productId: ', productId);
   // 'const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
 
-  findReviewsQuery(productId, (error, results) => {
+  modelQueries.findReviewsQuery(productId, (error, results) => {
     if (error) {
       console.log('Error: ', error);
       res.send(error);
@@ -21,9 +23,9 @@ const findReviews = (req, res) => {
 // /reviews/average /: productid
 const getAverageScore = (req, res) => {
   const productId = +req.params.productid;
-  const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
+  // const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
   
-  db.query(thisQuery, [productId], (error, results) => {
+  modelQueries.getAverageScoreQuery(productId, (error, results) => {
     if (error) {
       console.log('Error: ', error);
       res.send(error);
