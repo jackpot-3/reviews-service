@@ -48,15 +48,16 @@ const getAverageScore = (req, res) => {
 
 // /reviews/helpful /: reviewId
 const setReview = (req, res) => {
-  const thisId = req.params.reviewId;
-  const thisQuery = 'UPDATE reviews SET found_helpful = found_helpful + 1 WHERE id = $1';
+  const reviewId = req.params.reviewId;
+  console.log('reviewId', reviewId);
+  // const thisQuery = 'UPDATE reviews SET found_helpful = found_helpful + 1 WHERE id = $1';
   console.log('post recieved');
-  db.query(thisQuery, [thisId], (err) => {
+
+  modelQueries.setReviewQuery(reviewId, (err, setResults) => {
     if (err) {
       res.send(err);
     } else {
-      const secondQuery = 'SELECT * FROM reviews WHERE id = $1';
-      db.query(secondQuery, [thisId], (error, results) => {
+      modelQueries.selectReviews(reviewId, (error, results) => {
         if (error) {
           res.send(error);
         } else {
@@ -65,6 +66,7 @@ const setReview = (req, res) => {
       });
     }
   });
+
 };
 
 // /reviews/: reviewId /: reviewText
