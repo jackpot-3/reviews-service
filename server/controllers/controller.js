@@ -1,12 +1,14 @@
 const db = require('../../database/db.js');
+const findReviewsQuery = require('../../database/models/postgres/ReviewsQuery.js');
 
 // /reviews/all /: productid
 const findReviews = (req, res) => {
   console.log('*** findReviews ***');
   const productId = req.params.productid;
   console.log('productId: ', productId);
-  const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
-  db.query(thisQuery, [productId], (error, results) => {
+  // 'const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
+
+  findReviewsQuery(productId, (error, results) => {
     if (error) {
       console.log('Error: ', error);
       res.send(error);

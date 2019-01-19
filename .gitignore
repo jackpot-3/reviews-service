@@ -2,6 +2,7 @@
 node_modules
 package-lock.json
 public/bundle.js
+newrelic_agent.log
 
 
 __data-keep-4-now
