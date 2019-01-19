@@ -73,10 +73,10 @@ const setReview = (req, res) => {
 const updateReview =  (req, res) => {
   const { reviewId } = req.params;
   const { reviewText } = req.params;
-  const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
+  // const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
   console.log('used PUT Review updated', reviewText);
-
-  db.query(reviewQuery, [reviewText, reviewId], (error, results) => {
+  
+  modelQueries.updateReviewQuery(reviewText, reviewId, (error, results) => {
     if (error) {
       console.log('Error:', error);
       res.send(error);
@@ -85,22 +85,34 @@ const updateReview =  (req, res) => {
       res.send(results);
     }
   });
+  // db.query(reviewQuery, [reviewText, reviewId], (error, results) => {
+  // });
 };
 
 // /reviews/: reviewId
 const deleteReview = (req, res) => {
   const { reviewId } = req.params;
   console.log('reviewId: ', reviewId);
-  const deleteReviewQuery = 'DELETE FROM reviews WHERE id = $1';
+  // const deleteReviewQuery = 'DELETE FROM reviews WHERE id = $1';
 
-  db.query(deleteReviewQuery, [reviewId], (error, response) => {
+  modelQueries.deleteReviewQuery(reviewId, (error, result) => {
     if (error) {
       console.log('Error: ', error);
+      res.send(error);
     } else {
       console.log('You have deleted a review');
-      res.send(response);
+      res.send(result);
     }
   });
+
+  // db.query(deleteReviewQuery, [reviewId], (error, response) => {
+  //   if (error) {
+  //     console.log('Error: ', error);
+  //   } else {
+  //     console.log('You have deleted a review');
+  //     res.send(response);
+  //   }
+  // });
 };
 
 module.exports = {

@@ -30,9 +30,26 @@ const selectReviews = (reviewId, callback) => {
   });
 };
 
+const updateReviewQuery = (reviewText, reviewId, callback) => {
+  const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
+  db.query(reviewQuery, [reviewText, reviewId], (error, results) => {
+    callback(error, results);
+  });
+};
+
+const deleteReviewQuery = (reviewId, callback) => {
+  const deleteOneReview = 'DELETE FROM reviews WHERE id = $1';
+  db.query(deleteOneReview, [reviewId], (error, results) => {
+    callback(error, results);
+  });
+  
+};
+
 module.exports = {
   findReviewsQuery,
   getAverageScoreQuery,
   setReviewQuery,
   selectReviews,
+  updateReviewQuery,
+  deleteReviewQuery,
 };
