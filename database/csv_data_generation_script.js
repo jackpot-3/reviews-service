@@ -6,13 +6,11 @@ const fs = require('fs');
 
 const maxRecords = 10000000; // TURN ON
 // const maxRecords = 100; // TURN OFF
-const maxReviews = 10; // TURN ON
+const maxReviews = 5; // TURN ON
 
 const maxChunckSize = 1000000; // TURN ON
 // const maxChunckSize = 10;  // TURN OFF
 
-const rndSeed = [1, 1, 2, 3, 4, 3, 1, 1, 20, 25, 30];
-let pointer = 0;
 const t0 = new Date().getTime();
 
 let fakeDataRec = '';
@@ -68,8 +66,6 @@ for (let i = 1; i <= maxRecords; i += 1) {
         console.log('Error writing csv reviews chunk to file')/* Handle the error */
       }
 
-      pointer += 1;
-      pointer = pointer > rndSeed.length - 1 ? 20 : rndSeed.length - 1;
       // totalRecordCount += maxChunckSize;
       // console.log(totalRecordCount);
       fakeDataRev = '';
