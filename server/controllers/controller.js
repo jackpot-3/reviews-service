@@ -1,10 +1,10 @@
 // const db = require('../../database/db.js');
 
 // PosgreSQL
-// const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
+const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
 
 // MongoDB
-const modelQueries = require('../../database/models/mongodb/ReviewsQuery.js');
+// const modelQueries = require('../../database/models/mongodb/ReviewsQuery.js');
 
 // console.log('modelQueries: ',modelQueries);
 // /reviews/all /: productid
@@ -66,8 +66,6 @@ const getAverageScore = (req, res) => {
 const setReview = (req, res) => {
   const reviewId = req.params.reviewId;
   console.log('reviewId', reviewId);
-  // const thisQuery = 'UPDATE reviews SET found_helpful = found_helpful + 1 WHERE id = $1';
-  console.log('post recieved');
 
   modelQueries.setReviewQuery(reviewId, (err, setResults) => {
     if (err) {
@@ -88,7 +86,8 @@ const setReview = (req, res) => {
 // /reviews/: reviewId /: reviewText
 const updateReview =  (req, res) => {
   const { reviewId } = req.params;
-  const { reviewText } = req.params;
+  const { reviewText } = req.body;
+  console.log('***** reviewText: ****** ', reviewText);
   // const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
   console.log('used PUT Review updated', reviewText);
   

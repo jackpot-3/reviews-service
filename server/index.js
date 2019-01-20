@@ -21,7 +21,7 @@ app.get('/reviews/average/:productid', controller.getAverageScore);
 
 app.post('/reviews/helpful/:reviewId', controller.setReview);
 
-app.put('/reviews/:reviewId/:reviewText', controller.updateReview);
+app.put('/reviews/:reviewId', controller.updateReview);
 
 app.delete('/reviews/:reviewId', controller.deleteReview);
 
