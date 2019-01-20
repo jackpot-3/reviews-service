@@ -25,11 +25,30 @@ const getAverageScoreQuery = (productId, callback) => {
   });
 };
 
+const setReviewQuery = (reviewId, callback) => {
+  review.updateOne({ id: reviewId }, { $inc: { found_helpful: 1 } }, (error, results) => {
+    callback(error, results);
+  });
+};
+
+const selectReviews = (reviewId, callback) => {
+  review.find({ id: reviewId }, (error, results) => {
+    callback(error, results);
+  });
+};
+
+const updateReviewQuery = (reviewText, reviewId, callback) => {
+  console.log('reviewId: ', reviewId);
+  review.update({ id: reviewId }, { $set: { review_text: reviewText } }, (error, results) => {
+    callback(error, results);
+  });
+};
+
 module.exports = {
   findReviewsQuery,
   getAverageScoreQuery,
-  // setReviewQuery,
-  // selectReviews,
-  // updateReviewQuery,
+  setReviewQuery,
+  selectReviews,
+  updateReviewQuery,
   // deleteReviewQuery,
 };
