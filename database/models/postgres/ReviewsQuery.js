@@ -42,7 +42,6 @@ const deleteReviewQuery = (reviewId, callback) => {
   db.query(deleteOneReview, [reviewId], (error, results) => {
     callback(error, results);
   });
-  
 };
 
 module.exports = {

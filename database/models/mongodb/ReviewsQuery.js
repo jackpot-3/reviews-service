@@ -44,11 +44,17 @@ const updateReviewQuery = (reviewText, reviewId, callback) => {
   });
 };
 
+const deleteReviewQuery = (reviewId, callback) => {
+  review.deleteOne({ id: reviewId }, (error, results) => {
+    callback(error, results);
+  });
+};
+
 module.exports = {
   findReviewsQuery,
   getAverageScoreQuery,
   setReviewQuery,
   selectReviews,
   updateReviewQuery,
-  // deleteReviewQuery,
+  deleteReviewQuery,
 };
