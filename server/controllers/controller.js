@@ -1,8 +1,12 @@
-const db = require('../../database/db.js');
-const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
-// const findReviewsQuery = require('../../database/models/postgres/ReviewsQuery.js');
-// const getAverageScore = require('../../database/models/postgres/ReviewsQuery.js');
+// const db = require('../../database/db.js');
 
+// PosgreSQL
+// const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
+
+// MongoDB
+const modelQueries = require('../../database/models/mongodb/ReviewsQuery.js');
+
+// console.log('modelQueries: ',modelQueries);
 // /reviews/all /: productid
 const findReviews = (req, res) => {
   console.log('*** findReviews ***');
@@ -29,7 +33,7 @@ const getAverageScore = (req, res) => {
     if (error) {
       console.log('Error: ', error);
       res.send(error);
-    } else {
+    } else if (results.rows) {
       let totalScore = 0;
       for (let i = 0; i < results.rows.length; i += 1) {
         let temp = {};
@@ -37,6 +41,18 @@ const getAverageScore = (req, res) => {
         totalScore += temp.score;
       }
       const average = totalScore / results.rows.length;
+      const responseObject = {
+        averageScore: average,
+        totalReviews: results.length,
+      };
+      res.send(responseObject);
+    } else {
+      console.log('no rows results: ', results);
+      let totalScore = 0;
+      totalScore = results.reduce((acc, value) => {
+        return acc + value;
+      }, 0);
+      const average = totalScore / results.length;
       const responseObject = {
         averageScore: average,
         totalReviews: results.length,

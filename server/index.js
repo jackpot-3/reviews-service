@@ -1,10 +1,11 @@
-require('newrelic');
+// require('newrelic');
 
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const controller = require('./controllers/controller');
 
+const db = require('../database/db_mongo');
 const port = 3001;
 
 const app = express();
