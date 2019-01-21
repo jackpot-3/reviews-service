@@ -1,16 +1,19 @@
-// require('newrelic');
+require('newrelic');
 
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const controller = require('./controllers/controller');
 
-const db = require('../database/db_mongo');
+/**
+ * Uncomment for MongoDB test
+ */
+// const db = require('../database/db_mongo');
 const port = 3001;
 
 const app = express();
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 // app.use('/:productid', express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser());

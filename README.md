@@ -1,4 +1,4 @@
-# Project Name
+# Jackpot Reviews
 
 > Project description
 
@@ -40,8 +40,10 @@ npm install
 ## API
 
 Get Post Put(Admin Only) Delete(Admin Only) Reviews \
-PUT & DELETE will use an 64 digit hash as a prefix
+PUT & DELETE will use an 64 digit hash as a prefix \
+for route security.
 
+- GET /reviews/all/:productid
 - GET /reviews/average/:productid
 - POST /reviews/helpful/:reviewId
 - PUT /reviews/:reviewId/:reviewText

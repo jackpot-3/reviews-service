@@ -2,7 +2,6 @@ const db = require('../../db.js');
 
 const findReviewsQuery = (productId, callback) => {
   const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
-
   db.query(thisQuery, [productId], (error, results) => {
     callback(error, results);
   });
@@ -17,7 +16,6 @@ const getAverageScoreQuery = (productId, callback) => {
 
 const setReviewQuery = (reviewId, callback) => {
   const thisQuery = 'UPDATE reviews SET found_helpful = found_helpful + 1 WHERE id = $1';
-
   db.query(thisQuery, [reviewId], (error, results) => {
     callback(error, results);
   });

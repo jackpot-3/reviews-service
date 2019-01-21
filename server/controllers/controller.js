@@ -9,7 +9,7 @@ const modelQueries = require('../../database/models/postgres/ReviewsQuery.js');
 // console.log('modelQueries: ',modelQueries);
 // /reviews/all /: productid
 const findReviews = (req, res) => {
-  console.log('*** findReviews ***');
+  // console.log('*** findReviews ***');
   const productId = req.params.productid;
   console.log('productId: ', productId);
   // 'const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
@@ -87,9 +87,9 @@ const setReview = (req, res) => {
 const updateReview =  (req, res) => {
   const { reviewId } = req.params;
   const { reviewText } = req.body;
-  console.log('***** reviewText: ****** ', reviewText);
+  // console.log('***** reviewText: ****** ', reviewText);
   // const reviewQuery = 'UPDATE reviews SET review_text = $1 WHERE id = $2;';
-  console.log('used PUT Review updated', reviewText);
+  // console.log('used PUT Review updated', reviewText);
   
   modelQueries.updateReviewQuery(reviewText, reviewId, (error, results) => {
     if (error) {
@@ -107,7 +107,7 @@ const updateReview =  (req, res) => {
 // /reviews/: reviewId
 const deleteReview = (req, res) => {
   const { reviewId } = req.params;
-  console.log('reviewId: ', reviewId);
+  // console.log('reviewId: ', reviewId);
   // const deleteReviewQuery = 'DELETE FROM reviews WHERE id = $1';
 
   modelQueries.deleteReviewQuery(reviewId, (error, result) => {
@@ -115,19 +115,10 @@ const deleteReview = (req, res) => {
       console.log('Error: ', error);
       res.send(error);
     } else {
-      console.log('You have deleted a review');
+      // console.log('You have deleted a review');
       res.send(result);
     }
   });
-
-  // db.query(deleteReviewQuery, [reviewId], (error, response) => {
-  //   if (error) {
-  //     console.log('Error: ', error);
-  //   } else {
-  //     console.log('You have deleted a review');
-  //     res.send(response);
-  //   }
-  // });
 };
 
 module.exports = {
