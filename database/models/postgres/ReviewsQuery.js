@@ -30,7 +30,7 @@ const getAverageScoreQuery = (productId, callback) => {
       if (!cache) {
         db.query(thisQuery, [productId], (error, results) => {
           if (!error) {
-            redis.set(productId, results);
+            redis.set(`score:${productId}`, results);
           }
           callback(error, results);
         });
