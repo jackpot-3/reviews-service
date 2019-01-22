@@ -5,8 +5,6 @@ public/bundle.js
 newrelic_agent.log
 server/newrelic.js
 
-
-__data-keep-4-now
 database/*.txt
 database/*.tsv
 database/*.csv

@@ -1,10 +1,24 @@
+const Redis = require('ioredis');
 const db = require('../../db.js');
+
+const redis = new Redis();
+
 
 const findReviewsQuery = (productId, callback) => {
   const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
-  db.query(thisQuery, [productId], (error, results) => {
-    callback(error, results);
-  });
+  redis.get(productId)
+    .then((cache) => {
+      // console.log('redis returned cache: ', cache);
+      if (cache) { callback(null, cache); }
+      if (!cache) {
+        db.query(thisQuery, [productId], (error, results) => {
+          if (!error) {
+            redis.set(productId, results);
+          }
+          callback(error, results);
+        });
+      }
+    });
 };
 
 const getAverageScoreQuery = (productId, callback) => {
