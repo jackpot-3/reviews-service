@@ -24,11 +24,11 @@ const findReviews = (req, res) => {
   });
 };
 
-// /reviews/average /: productid
+// /reviews/average/:productid
 const getAverageScore = (req, res) => {
   const productId = +req.params.productid;
   // const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
-  
+
   modelQueries.getAverageScoreQuery(productId, (error, results) => {
     if (error) {
       console.log('Error: ', error);

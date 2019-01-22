@@ -18,11 +18,25 @@ const findReviewsQuery = (productId, callback) => {
           callback(error, results);
         });
       }
-    });
+    }); // then
 };
 
 const getAverageScoreQuery = (productId, callback) => {
   const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
+  redis.get(`score:${productId}`)
+    .then((cache) => {
+      // console.log('redis returned score:productId cache: ', cache);
+      if (cache) { callback(null, cache); }
+      if (!cache) {
+        db.query(thisQuery, [productId], (error, results) => {
+          if (!error) {
+            redis.set(productId, results);
+          }
+          callback(error, results);
+        });
+      }
+    }); // then
+
   db.query(thisQuery, [productId], (error, results) => {
     callback(error, results);
   });
