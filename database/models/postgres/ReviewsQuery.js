@@ -8,7 +8,6 @@ const findReviewsQuery = (productId, callback) => {
   const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
   redis.get(productId)
     .then((cache) => {
-      // console.log('redis returned cache: ', cache);
       if (cache) { callback(null, cache); }
       if (!cache) {
         db.query(thisQuery, [productId], (error, results) => {
@@ -25,7 +24,6 @@ const getAverageScoreQuery = (productId, callback) => {
   const thisQuery = 'SELECT score FROM reviews WHERE product_id = $1';
   redis.get(`score:${productId}`)
     .then((cache) => {
-      // console.log('redis returned score:productId cache: ', cache);
       if (cache) { callback(null, cache); }
       if (!cache) {
         db.query(thisQuery, [productId], (error, results) => {
@@ -36,10 +34,6 @@ const getAverageScoreQuery = (productId, callback) => {
         });
       }
     }); // then
-
-  db.query(thisQuery, [productId], (error, results) => {
-    callback(error, results);
-  });
 };
 
 const setReviewQuery = (reviewId, callback) => {
