@@ -3,6 +3,13 @@ const db = require('../../db.js');
 
 const redis = new Redis();
 
+redis.on('connect', () => {
+  console.log('Redis connected');
+});
+
+redis.on('error', (err) => {
+  console.log('Redis Error ', err);
+});
 
 const findReviewsQuery = (productId, callback) => {
   const thisQuery = 'SELECT * FROM reviews WHERE product_id = $1';
